@@ -15,6 +15,7 @@
 
 #include "GCodeHandler.h"
 #include "G00Handler.h"
+#include "G01Handler.h"
 #include "G28Handler.h"
 
 #include "F09Handler.h"

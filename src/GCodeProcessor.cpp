@@ -223,6 +223,11 @@ GCodeHandler *GCodeProcessor::getGCodeHandler(CommandCodeEnum codeEnum)
     handler = G00Handler::getInstance();
   }
 
+  if (codeEnum == G01)
+  {
+    handler = G01Handler::getInstance();
+  }
+
   if (codeEnum == G28)
   {
     handler = G28Handler::getInstance();
