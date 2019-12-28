@@ -734,7 +734,7 @@ int Movement::moveToCoords(double xDestScaled, double yDestScaled, double zDestS
     if (Serial.available() > 0)
     {
       incomingByte = Serial.read();
-      if (incomingByte == 69 || incomingByte == 101)
+      if (incomingByte == 69 || incomingByte == 101 )
       {
         serialBuffer += "R99 emergency stop\r\n";
 
@@ -753,6 +753,24 @@ int Movement::moveToCoords(double xDestScaled, double yDestScaled, double zDestS
 
         error = ERR_EMERGENCY_STOP;
       }
+      if ( incomingByte == 83 || incomingByte == 115  )
+           {
+             serialBuffer += "R99 stoped \r\n";
+
+//             Serial.print(COMM_REPORT_EMERGENCY_STOP);
+             CurrentState::getInstance()->printQAndNewLine();
+
+             axisX.deactivateAxis();
+             axisY.deactivateAxis();
+             axisZ.deactivateAxis();
+
+             axisActive[0] = false;
+             axisActive[1] = false;
+             axisActive[2] = false;
+
+             error = ERR_NO_ERROR;
+           }
+
     }
 
     if (error != 0)
@@ -1843,4 +1861,16 @@ void Movement::checkEncoders()
     ENC_Z_B_PORT   & ENC_Z_B_BYTE,
     ENC_Z_A_Q_PORT & ENC_Z_A_Q_BYTE,
     ENC_Z_B_Q_PORT & ENC_Z_B_Q_BYTE);
+}
+
+void Movement::stop()
+{
+//handler stop
+	  axisX.deactivateAxis();
+	  axisY.deactivateAxis();
+	  axisZ.deactivateAxis();
+
+      axisActive[0] = false;
+      axisActive[1] = false;
+      axisActive[2] = false;
 }

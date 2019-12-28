@@ -68,6 +68,7 @@ public:
   unsigned long i3 = 0;
   unsigned long i4 = 0;
 
+  void stop();
 private:
 
   MovementAxis axisX;
