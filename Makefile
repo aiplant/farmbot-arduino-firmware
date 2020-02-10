@@ -6,7 +6,7 @@ FBARDUINO_FIRMWARE_SRC_DIR ?= src
 FBARDUINO_FIRMWARE_BUILD_DIR ?= $(BUILD_DIR)/sketch
 FBARDUINO_FIRMWARE_LIB_BUILD_DIR ?= $(BUILD_DIR)/libraries
 
-ARDUINO_INSTALL_DIR ?= $(HOME)/arduino-1.8.5
+ARDUINO_INSTALL_DIR ?= /mnt/d/programs/ubuntu/arduino-1.8.5
 
 # Files to be tracked for make to know to rebuild.
 CXX_SRC := $(wildcard $(FBARDUINO_FIRMWARE_SRC_DIR)/*.cpp)
@@ -23,8 +23,8 @@ AR := $(ARDUINO_INSTALL_DIR)/hardware/tools/avr/bin/avr-gcc-ar
 OBJ_COPY := $(ARDUINO_INSTALL_DIR)/hardware/tools/avr/bin/avr-objcopy
 MKDIR_P := mkdir -p
 
-CXX_FLAGS := -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -flto -mmcu=atmega2560 -DF_CPU=16000000L -DARDUINO=10600 -DARDUINO_AVR_MEGA2560 -DARDUINO_ARCH_AVR
-CFLAGS := -w -Os -g -flto -fuse-linker-plugin -Wl,--gc-sections,--relax -mmcu=atmega2560
+CXX_FLAGS := -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -fno-lto -mmcu=atmega2560 -DF_CPU=16000000L -DARDUINO=10600 -DARDUINO_AVR_MEGA2560 -DARDUINO_ARCH_AVR
+CFLAGS := -w -Os -g -fno-lto  -fuse-linker-plugin -Wl,--gc-sections,--relax -mmcu=atmega2560
 
 .DEFAULT_GOAL := all
 
